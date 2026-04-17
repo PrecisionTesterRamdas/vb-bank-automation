@@ -1,0 +1,12 @@
+[
+  {
+    "recipientAccountNumber": 3456789012,
+    "amount": 10,
+    "noteDescription": "This is a grocerry payment"
+  },
+  {
+    "recipientAccountNumber": 3456789012,
+    "amount": 20,
+    "noteDescription": "This is a cloths shopping payment"
+  }
+]
