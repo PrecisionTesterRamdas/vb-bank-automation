@@ -11,6 +11,6 @@ for (const data of transferData) {
       data.amount,
       data.noteDescription,
     );
-    await expect(page.getByTestId("alert-success")).toBeVisible();
+    await expect(page.getByTestId("alert-succes")).toBeVisible();
   });
 }
