@@ -25,12 +25,12 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
--name: Send Slack Notification
-uses: rtCamp/action-slack-notify@v2
-env:
-SLACK_WEBHOOK: ${{secrets.SLACK_WEBHOOK}}
-SLACK_USERNAME: "Github actions Bot"
-SLACK_TITLE: "Playwright E2E Test Failed"
-SLACK_MESSAGE: "A regression was caught in the latest push. Please check the logs."
-SLACK_COLOR: "#danger"
--if: failure()
+      - name: Send Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{secrets.SLACK_WEBHOOK}}
+          SLACK_USERNAME: "Github actions Bot"
+          SLACK_TITLE: "Playwright E2E Test Failed"
+          SLACK_MESSAGE: "A regression was caught in the latest push. Please check the logs."
+          SLACK_COLOR: "#danger"
+        if: failure()
