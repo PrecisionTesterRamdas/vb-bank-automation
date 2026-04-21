@@ -1,10 +1,12 @@
 [
   {
+    "loginSuccessFlag": "Successful",
     "description": "Valid credentials",
     "username": "john.doe",
     "password": "user123"
   },
   {
+    "loginSuccessFlag": "Unsuccessful",
     "description": "Invalid credentials",
     "username": "john.doe",
     "password": "invalid123"

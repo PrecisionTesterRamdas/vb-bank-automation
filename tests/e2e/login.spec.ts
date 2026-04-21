@@ -5,23 +5,18 @@ import loginData from "../../test-data/login.json";
 test.use({ storageState: { cookies: [], origins: [] } });
 
 for (const data of loginData) {
-  test(`Successful user login test for ${data.description}`, async ({
+  test(`${data.loginSuccessFlag} user login test for ${data.description}`, async ({
     page,
     loginPage,
   }) => {
     await loginPage.navigate();
     await loginPage.login(data.username, data.password);
-    await expect(page).toHaveURL(/.*dashboard/);
-  });
-
-  test(`Unsuccessful user login test for ${data.description}`, async ({
-    page,
-    loginPage,
-  }) => {
-    await loginPage.navigate();
-    await loginPage.login(data.username, data.password);
-    await expect(page.getByTestId("alert-error")).toHaveText(
-      "Invalid username or password",
-    );
+    if (data.loginSuccessFlag === "Successful") {
+      await expect(page).toHaveURL(/.*dashboard/);
+    } else if (data.loginSuccessFlag === "Unsuccessful") {
+      await expect(page.getByTestId("alert-error")).toHaveText(
+        "Invalid username or password",
+      );
+    }
   });
 }
