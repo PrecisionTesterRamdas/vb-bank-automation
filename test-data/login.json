@@ -3,12 +3,14 @@
     "loginSuccessFlag": "Successful",
     "description": "Valid credentials",
     "username": "john.doe",
-    "password": "user123"
+    "password": "user123",
+    "isValid": true
   },
   {
     "loginSuccessFlag": "Unsuccessful",
     "description": "Invalid credentials",
     "username": "john.doe",
-    "password": "invalid123"
+    "password": "invalid123",
+    "isValid": false
   }
 ]
