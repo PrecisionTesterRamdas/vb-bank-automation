@@ -1,0 +1,12 @@
+[
+  {
+    "description": "Valid credentials",
+    "username": "john.doe",
+    "password": "user123"
+  },
+  {
+    "description": "Invalid credentials",
+    "username": "john.doe",
+    "password": "invalid123"
+  }
+]

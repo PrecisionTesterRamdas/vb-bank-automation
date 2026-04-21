@@ -1,9 +1,27 @@
 import { test, expect } from "../../src/fixtures/baseTest";
+import { LoginPage } from "../../src/pages/LoginPage";
+import loginData from "../../test-data/login.json";
 
 test.use({ storageState: { cookies: [], origins: [] } });
 
-test("Successful user login test", async ({ page, loginPage }) => {
-  await loginPage.navigate();
-  await loginPage.login("john.doe", "user123");
-  await expect(page).toHaveURL(/.*dashboard/);
-});
+for (const data of loginData) {
+  test(`Successful user login test for ${data.description}`, async ({
+    page,
+    loginPage,
+  }) => {
+    await loginPage.navigate();
+    await loginPage.login(data.username, data.password);
+    await expect(page).toHaveURL(/.*dashboard/);
+  });
+
+  test(`Unsuccessful user login test for ${data.description}`, async ({
+    page,
+    loginPage,
+  }) => {
+    await loginPage.navigate();
+    await loginPage.login(data.username, data.password);
+    await expect(page.getByTestId("alert-error")).toHaveText(
+      "Invalid username or password",
+    );
+  });
+}
