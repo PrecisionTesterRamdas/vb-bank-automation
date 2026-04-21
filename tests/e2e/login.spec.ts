@@ -1,5 +1,4 @@
 import { test, expect } from "../../src/fixtures/baseTest";
-import { LoginPage } from "../../src/pages/LoginPage";
 import loginData from "../../test-data/login.json";
 
 test.use({ storageState: { cookies: [], origins: [] } });
