@@ -15,7 +15,7 @@ export const test = baseTest.extend<MyFixtures>({
     await use(new LoginPage(page));
   },
 
-  // Defining the loginPage fixture
+  // Defining the transferPage fixture
   transferPage: async ({ page }, use) => {
     await use(new TransferPage(page));
   },
