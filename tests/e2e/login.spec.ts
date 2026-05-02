@@ -1,54 +1,36 @@
 import { test, expect } from "../../src/fixtures/baseTest";
-import loginData from "../../test-data/login.json";
+import validLoginData from "../../test-data/validLogin.json";
+import invalidLoginData from "../../test-data/invalidLogin.json";
 
 test.use({ storageState: { cookies: [], origins: [] } });
 
-for (const data of loginData) {
-  if (data.isValid === true && data.description === "Valid credentials") {
-    test.fixme(`${data.loginSuccessFlag} user login test for ${data.description}`, async ({
-      page,
-      loginPage,
-    }) => {
-      await loginPage.navigate();
-      await loginPage.login(data.username, data.password);
-      await expect(page).toHaveURL(/.*dashboardsss/);
-    });
-  }
+for (const data of validLoginData) {
+  test(`User login test for ${data.description}`, async ({
+    page,
+    loginPage,
+  }) => {
+    await loginPage.navigate();
+    await loginPage.login(data.username, data.password);
+    await expect(page).toHaveURL(/.*dashboard/);
+  });
+}
 
-  if (data.isValid === false && data.description === "Invalid credentials") {
-    test(`${data.loginSuccessFlag} user login test for ${data.description}`, async ({
-      page,
-      loginPage,
-    }) => {
-      await loginPage.navigate();
-      await loginPage.login(data.username, data.password);
+for (const data of invalidLoginData) {
+  test(`User login test for ${data.description}`, async ({
+    loginPage,
+    page,
+  }) => {
+    await loginPage.navigate();
+    await loginPage.login(data.username, data.password);
+
+    if (data.errorType === "badCredentials") {
       await expect(page.getByTestId("alert-error")).toHaveText(
-        "Invalid username or password",
+        data.expectedError,
       );
-    });
-  }
-
-  if (data.isUsernameEmpty === true) {
-    test(`Test for the case - ${data.description}`, async ({
-      page,
-      loginPage,
-    }) => {
-      await loginPage.navigate();
-      await loginPage.login(data.username, data.password);
-      const validationText = await loginPage.getNativeValidationMessage(data.description);
-      expect(validationText).toBe("Please fill out this field.");
-    });
-  }
-
-  if (data.isPasswordEmpty === true) {
-    test(`Test for the case - ${data.description}`, async ({
-      page,
-      loginPage,
-    }) => {
-      await loginPage.navigate();
-      await loginPage.login(data.username, data.password);
-      const validationText = await loginPage.getNativeValidationMessage(data.description);
-      expect(validationText).toBe("Please fill out this field.");
-    });
-  }
+    } else {
+      const nativeValidationMessage =
+        await loginPage.getNativeValidationMessage(data.errorType);
+      expect(nativeValidationMessage).toBe(data.expectedError);
+    }
+  });
 }

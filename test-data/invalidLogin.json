@@ -1,0 +1,30 @@
+[
+  {
+    "description": "Invalid username",
+    "username": "wrong-john.doe",
+    "password": "user123",
+    "errorType": "badCredentials",
+    "expectedError": "Invalid username or password"
+  },
+  {
+    "description": "Invalid password",
+    "username": "john.doe",
+    "password": "wrong-user123",
+    "errorType": "badCredentials",
+    "expectedError": "Invalid username or password"
+  },
+  {
+    "description": "Username is empty",
+    "username": "",
+    "password": "user123",
+    "errorType": "Username is empty",
+    "expectedError": "Please fill out this field."
+  },
+  {
+    "description": "Password is empty",
+    "username": "john.doe",
+    "password": "",
+    "errorType": "Password is empty",
+    "expectedError": "Please fill out this field."
+  }
+]
