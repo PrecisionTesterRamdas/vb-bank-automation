@@ -24,4 +24,23 @@ export class LoginPage {
     await this.passwordInput.fill(password);
     await this.loginButton.click();
   }
+
+  async getNativeValidationMessage(errorType: string): Promise<string> {
+    switch (errorType) {
+      case "Username is empty":
+        const Usernamemessage = await this.usernameInput.evaluate(
+          (node: HTMLInputElement) => node.validationMessage,
+        );
+        return Usernamemessage;
+      case "Password is empty":
+        const Passwordmessage = await this.passwordInput.evaluate(
+          (node: HTMLInputElement) => node.validationMessage,
+        );
+        return Passwordmessage;
+      default:
+        throw new Error(
+          `Validation message not defined for error type: ${errorType}`,
+        );
+    }
+  }
 }

@@ -4,13 +4,35 @@
     "description": "Valid credentials",
     "username": "john.doe",
     "password": "user123",
-    "isValid": true
+    "isValid": true,
+    "isUsernameEmpty": false,
+    "isPasswordEmpty":false
   },
   {
     "loginSuccessFlag": "Unsuccessful",
     "description": "Invalid credentials",
     "username": "john.doe",
     "password": "invalid123",
-    "isValid": false
+    "isValid": false,
+    "isUsernameEmpty": false,
+    "isPasswordEmpty":false
+  },
+  {
+    "loginSuccessFlag": "Unsuccessful",
+    "description": "Username is empty",
+    "username": "",
+    "password": "user123",
+    "isValid": false,
+    "isUsernameEmpty": true,
+    "isPasswordEmpty":false
+  },
+  {
+    "loginSuccessFlag": "Unsuccessful",
+    "description": "Password is empty",
+    "username": "john.doe",
+    "password": "",
+    "isValid": false,
+    "isUsernameEmpty": false,
+    "isPasswordEmpty":true
   }
 ]
